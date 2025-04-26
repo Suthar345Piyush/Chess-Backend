@@ -9,7 +9,12 @@ const { title } = require("process");
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(server);
+const io = socket(server , {
+  cors : {
+    origin : "http://localhost:5002/",
+    methods : ["GET" , "POST"],
+  }
+});
 
 
 const chess = new Chess();
@@ -78,8 +83,8 @@ io.on("connection" , function(uniqueSocket) {
   });
 });
 
-server.listen(8003 , function () { 
-  console.log("Server started on PORT 8003");
+server.listen(5002 , function () { 
+  console.log("Server started on PORT 5002");
 })
 
 
