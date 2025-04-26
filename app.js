@@ -78,8 +78,8 @@ io.on("connection" , function(uniqueSocket) {
   });
 });
 
-server.listen(8421 , function () { 
-  console.log("Server started on PORT 8421");
+server.listen(8003 , function () { 
+  console.log("Server started on PORT 8003");
 })
 
 
