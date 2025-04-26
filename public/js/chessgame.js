@@ -1,9 +1,27 @@
 const socket  = io();
+const chess = new Chess();
+const boardElement = document.getElementById("#chessboard");
 
 
-socket.emit("Hello working with sockets");
-socket.on("hello received successfully" , function(){
-  console.log("hello message received");
-});
+let draggedPiece = null;
+let sourceSquare = null;
+let playerRole = null;
+
+const renderBoard = () => {
+   const board = chess.board();
+   boardElement.innerHTML = " ";
+   console.log(board);
+};
+const handleMove  = () => {};
+const getPieceUnicode = () => {};
+
+
+
+renderBoard();
+
+
+
+ 
+
 
  

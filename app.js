@@ -47,7 +47,7 @@ io.on("connection" , function(uniqueSocket) {
      uniqueSocket.emit("spectatorRole");
   }
 
- uniqueSocket.io("disconnect" , function(){
+ uniqueSocket.on("disconnect" , function(){
     if(uniqueSocket.id === players.white){
        delete players.white;
     } else if(uniqueSocket.id === players.black){
@@ -78,11 +78,8 @@ io.on("connection" , function(uniqueSocket) {
   });
 });
 
-
-
-
-server.listen(3000 , function () { 
-  console.log("Server started on PORT 3000");
+server.listen(8421 , function () { 
+  console.log("Server started on PORT 8421");
 })
 
 
