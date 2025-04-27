@@ -9,12 +9,7 @@ const { title } = require("process");
 const app = express();
 const server = http.createServer(app);
 
-const io = socket(server , {
-  cors : {
-    origin : "http://localhost:5002/",
-    methods : ["GET" , "POST"],
-  }
-});
+const io = socket(server);
 
 
 const chess = new Chess();

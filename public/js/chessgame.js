@@ -27,7 +27,7 @@ const renderBoard = () => {
             const peiceElement = document.createElement("div");
             peiceElement.classList.add("piece" , square.color === "w" ? "white" : "black");
 
-            peiceElement.innerText = "";
+            peiceElement.innerText = getPieceUnicode(square);
             peiceElement.draggable =  playerRole === square.color;
             
             
@@ -67,12 +67,72 @@ const renderBoard = () => {
    });
 
 
+   if(playerRole === "b"){
+      boardElement.classList.add("flipped");
+   }
+   else {
+      boardElement.classList.remove("flipped");
+   }
 };
 
 
 
-const handleMove  = () => {};
-const getPieceUnicode = () => {};
+const handleMove  = (source , target) => {
+   const move ={
+      from : `${String.fromCharCode(97 + source.col)}${8 - source.row}`,
+      to : `${String.fromCharCode(97 + target.col)}${8 - target.row}`,
+      promotion : 'q',
+   }
+
+   socket.emit("move" , move);
+};
+
+
+
+const getPieceUnicode = (piece) => {
+   const unicodePieces = {
+      p : "♟",
+      r : "♖",
+      n : "♘",
+      b : "♗",
+      q : "♕",
+      k : "♔",
+      P : "♙",
+      R : "♜",
+      N : "♞",
+      B : "♝",
+      Q : "♛",
+      K : "♚",
+   };
+   return unicodePieces[piece.type] || "";
+};
+
+
+
+socket.on("playerRole" , function (role){
+   playerRole = role;
+   renderBoard();
+});
+
+
+
+socket.on("spectatorRole" , function(){
+   playerRole = null;
+   renderBoard();
+});
+
+socket.on("boardUpdate" , function(fen){
+   chess.load(fen);
+   renderBoard();
+});
+
+
+socket.on("move" , function(move){
+   chess.move(move);
+   renderBoard();
+});
+
+
 
 
    
