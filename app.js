@@ -16,8 +16,9 @@ const chess = new Chess();
 let players  = {};
 let currentPlayers = "W";
 
-app.set("view engine" , "ejs");
+
 app.use(express.static(path.join(__dirname , "public")));
+app.set("view engine" , "ejs");
 
 app.get("/" , (req , res) => {
   res.render("index" , { title :"Welcome to Chess Game" });
@@ -78,8 +79,8 @@ io.on("connection" , function(uniqueSocket) {
   });
 });
 
-server.listen(5001 , function () { 
-  console.log("Server started on PORT 5001");
+server.listen(5003 , function () { 
+  console.log("Server started on PORT 5003");
 })
 
 
